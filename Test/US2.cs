@@ -17,7 +17,7 @@ namespace Test
             PlayerToken player = new PlayerToken();
             player.Position = 97;
             player.Move(3);
-            Assert.True(player.Position == 100);
+            Assert.True(player.Position == API.Constants.BOARD_SQUARES);
             Assert.True(player.IsWinner());
         }
 

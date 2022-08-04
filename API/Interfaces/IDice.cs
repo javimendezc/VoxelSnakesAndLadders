@@ -2,6 +2,6 @@
 {
     public interface IDice
     {
-        int Throw();
+        int Roll();
     }
 }

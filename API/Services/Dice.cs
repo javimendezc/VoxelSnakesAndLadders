@@ -4,9 +4,9 @@ namespace API.Services
 {
     public class Dice : IDice
     {
-        private int _sides = 6;
+        private int _sides = Constants.DICE_SIDES;
 
-        public int Throw()
+        public int Roll()
         {
             return new Random().Next(1, this._sides + 1);
         }

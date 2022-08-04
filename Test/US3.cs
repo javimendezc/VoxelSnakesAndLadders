@@ -2,8 +2,6 @@
 using API.Services;
 using Moq;
 using System;
-using System.Collections.Generic;
-using System.Linq;
 using Xunit;
 
 namespace Test
@@ -24,12 +22,13 @@ namespace Test
             Dice dice = new Dice();
 
             int i = 0;
-            while ((!invalidResult) && (i<100))
+            //Do 100 rolls to ensure enought amount of data
+            while ((!invalidResult) && (i < 100))
             {
                 i++;
-                int result = dice.Throw();
+                int result = dice.Roll();
                 flagsValues[result - 1] = true;
-                invalidResult = (result < 1) || (result > 6);
+                invalidResult = (result < 1) || (result > API.Constants.DICE_SIDES);
             }
 
             Assert.DoesNotContain(false, flagsValues);
@@ -45,11 +44,11 @@ namespace Test
             Then the token should move 4 spaces
              */
             var mockDice = new Mock<IDice>();
-            mockDice.Setup(x => x.Throw()).Returns(4);
+            mockDice.Setup(x => x.Roll()).Returns(4);
 
-            int spacesToMove = mockDice.Object.Throw();
+            int spacesToMove = mockDice.Object.Roll();
             
-            int initPosition = new Random().Next(1, 100 - spacesToMove);
+            int initPosition = new Random().Next(1, API.Constants.BOARD_SQUARES - spacesToMove);
 
             PlayerToken player = new PlayerToken();
             player.Position = initPosition;

@@ -9,13 +9,13 @@ namespace API.Services
 
         public bool IsWinner()
         {
-            return this.Position == 100;
+            return this.Position == Constants.BOARD_SQUARES;
         }
 
         public void Move(int spaces)
         {
             int finalPos = this.Position + spaces;
-            if (finalPos <= 100)
+            if (finalPos <= Constants.BOARD_SQUARES)
             {
                 this.Position = finalPos;
             }
