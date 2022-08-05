@@ -10,7 +10,16 @@ namespace API.Services
         private GAME_STAGES _stage = GAME_STAGES.STOPED;
 
         public int NumberSquares { get; } = Constants.BOARD_SQUARES;
-        public GAME_STAGES Stage { get { return _stage; } }
+        public GAME_STAGES Stage 
+        { 
+            get 
+            { 
+                if ((_players == null) || (_players.ToList().Count <= 0) || (_idice == null)) _stage = GAME_STAGES.STOPED;
+                else if(_players.Any(x => x.IsWinner(this))) _stage = GAME_STAGES.ENDED;
+                else _stage = GAME_STAGES.GAMING;
+                return _stage; 
+            } 
+        }
 
         public Board(IDice dice)
         {
@@ -25,16 +34,19 @@ namespace API.Services
 
         public void Play()
         {
-            if (_players != null)
+            if (Stage == GAME_STAGES.GAMING)
             {
-                foreach (var player in _players)
+                while(Stage != GAME_STAGES.ENDED)
                 {
-                    int spacesToMove = _idice.Roll();
-                    player.Move(spacesToMove);
-                    if (player.IsWinner(this))
+                    foreach (var player in _players)
                     {
-                        _stage = GAME_STAGES.ENDED;
-                        break;
+                        int spacesToMove = _idice.Roll();
+                        player.Move(spacesToMove);
+                        if (player.IsWinner(this))
+                        {
+                            _stage = GAME_STAGES.ENDED;
+                            break;
+                        }
                     }
                 }
             }
