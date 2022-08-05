@@ -8,7 +8,7 @@ namespace API.Services
 
         public int Roll()
         {
-            return new Random().Next(1, this._sides + 1);
+            return new Random().Next(1, _sides + 1);
         }
     }
 }

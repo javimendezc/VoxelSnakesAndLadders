@@ -1,5 +1,7 @@
 using API.Services;
+using System.Collections.Generic;
 using Xunit;
+using static API.Enums;
 
 namespace Test
 {
@@ -13,8 +15,15 @@ namespace Test
             When the token is placed on the board
             Then the token is on square 1
             */
+            List<PlayerToken> listPlayers = new List<PlayerToken>();
             PlayerToken player = new PlayerToken();
+            listPlayers.Add(player);
+
+            Board board = new Board(new Dice());
+            board.Start(listPlayers);
+            Assert.True(board.Stage.Equals(GAME_STAGES.GAMING));
             Assert.True(player.Position == 1);
+            Assert.DoesNotContain(listPlayers, p => p.Position != 1);
         }
 
         [Fact(DisplayName = "UAT2: Token_Is_On_Square_4_When_Moved_3_Spaces")]

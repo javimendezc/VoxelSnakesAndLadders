@@ -4,12 +4,12 @@ namespace API.Services
 {
     public class PlayerToken : IPlayerToken
     {
-        public string Name { get; set; } = string.Empty;
+        public string Name { get; set; } = $"Player_{Guid.NewGuid()}";
         public int Position { get; set; } = 1;
 
-        public bool IsWinner()
+        public bool IsWinner(IBoard board) 
         {
-            return this.Position == Constants.BOARD_SQUARES;
+            return this.Position == board.NumberSquares;
         }
 
         public void Move(int spaces)

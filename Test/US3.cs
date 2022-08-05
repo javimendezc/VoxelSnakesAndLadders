@@ -22,7 +22,7 @@ namespace Test
             Dice dice = new Dice();
 
             int i = 0;
-            //Do 100 rolls to ensure enought amount of data
+            //Do 100 rolls in order to ensure enought amount of data
             while ((!invalidResult) && (i < 100))
             {
                 i++;

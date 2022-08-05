@@ -1,4 +1,5 @@
 ﻿using API.Services;
+using System.Collections.Generic;
 using Xunit;
 
 namespace Test
@@ -18,7 +19,7 @@ namespace Test
             player.Position = 97;
             player.Move(3);
             Assert.True(player.Position == API.Constants.BOARD_SQUARES);
-            Assert.True(player.IsWinner());
+            Assert.True(player.IsWinner(new Board(new Dice())));
         }
 
         [Fact(DisplayName = "UAT2: Token_Is_On_97_When_Moved_4_From_97_And_Not_Win")]
@@ -34,7 +35,7 @@ namespace Test
             player.Position = 97;
             player.Move(4);
             Assert.True(player.Position == 97);
-            Assert.False(player.IsWinner());
+            Assert.False(player.IsWinner(new Board(new Dice())));
         }
     }
 }

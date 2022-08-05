@@ -3,6 +3,6 @@
     public interface IPlayerToken
     {
         public void Move(int spaces);
-        public bool IsWinner();
+        public bool IsWinner(IBoard board);
     }
 }
