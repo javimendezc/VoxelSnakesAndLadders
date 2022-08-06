@@ -1,4 +1,5 @@
-﻿using API.Interfaces;
+﻿using API;
+using API.Interfaces;
 using API.Services;
 using Moq;
 using System;
@@ -28,7 +29,7 @@ namespace Test
                 i++;
                 int result = dice.Roll();
                 flagsValues[result - 1] = true;
-                invalidResult = (result < 1) || (result > API.Constants.DICE_SIDES);
+                invalidResult = (result < 1) || (result > Constants.DICE_SIDES);
             }
 
             Assert.DoesNotContain(false, flagsValues);
@@ -48,7 +49,7 @@ namespace Test
 
             int spacesToMove = mockDice.Object.Roll();
             
-            int initPosition = new Random().Next(1, API.Constants.BOARD_SQUARES - spacesToMove);
+            int initPosition = new Random().Next(1, Constants.BOARD_SQUARES - spacesToMove);
 
             PlayerToken player = new PlayerToken();
             player.Position = initPosition;

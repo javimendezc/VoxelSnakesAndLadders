@@ -1,8 +1,8 @@
 ﻿namespace API.Interfaces
 {
-    public interface IBoard
+    public interface IGame
     {
-        public int NumberSquares { get; }
+        int NumberSquares { get; }
 
         void Start(IEnumerable<IPlayerToken> players);
         void Play();

@@ -7,9 +7,9 @@ namespace API.Services
         public string Name { get; set; } = $"Player_{Guid.NewGuid()}";
         public int Position { get; set; } = 1;
 
-        public bool IsWinner(IBoard board) 
+        public bool IsWinner(IGame game) 
         {
-            return this.Position == board.NumberSquares;
+            return this.Position == game.NumberSquares;
         }
 
         public void Move(int spaces)

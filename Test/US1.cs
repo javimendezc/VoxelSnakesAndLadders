@@ -1,4 +1,6 @@
+using API.Interfaces;
 using API.Services;
+using Moq;
 using System.Collections.Generic;
 using Xunit;
 using static API.Enums;
@@ -7,21 +9,23 @@ namespace Test
 {
     public class US1
     {
+        
+
         [Fact(DisplayName = "UAT1: Token_Is_On_Square_1_When_Game_Starts")]
         public void Token_Is_On_Square_1_When_Game_Starts()
         {
             /*
             Given the game is started
-            When the token is placed on the board
+            When the token is placed on the game
             Then the token is on square 1
             */
             List<PlayerToken> listPlayers = new List<PlayerToken>();
             PlayerToken player = new PlayerToken();
             listPlayers.Add(player);
 
-            Board board = new Board(new Dice());
-            board.Start(listPlayers);
-            Assert.True(board.Stage.Equals(GAME_STAGES.GAMING));
+            Game game = new Game(new Mock<IDice>().Object);
+            game.Start(listPlayers);
+            Assert.True(game.Stage.Equals(GAME_STAGES.GAMING));
             Assert.True(player.Position == 1);
             Assert.DoesNotContain(listPlayers, p => p.Position != 1);
         }
@@ -52,7 +56,6 @@ namespace Test
             player.Move(3);
             player.Move(4);
             Assert.True(player.Position == 8);
-
         }
     }
 }

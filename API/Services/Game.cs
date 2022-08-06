@@ -3,7 +3,7 @@ using static API.Enums;
 
 namespace API.Services
 {
-    public class Board: IBoard
+    public class Game: IGame
     {
         private IEnumerable<IPlayerToken>? _players;
         private IDice _idice;
@@ -21,7 +21,7 @@ namespace API.Services
             } 
         }
 
-        public Board(IDice dice)
+        public Game(IDice dice)
         {
             _idice = dice;
         }
