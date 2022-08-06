@@ -28,7 +28,7 @@ namespace Test
             List<IPlayerToken> listPlayers = new List<IPlayerToken>();
             listPlayers.Add(_player);
 
-            IGame game = new Mock<Game>(new Mock<IDice>().Object).Object;
+            IGame game = new Mock<Game>().Object;
             game.Start(listPlayers);
 
             Assert.True(game.Stage.Equals(GAME_STAGES.GAMING));

@@ -14,10 +14,7 @@ namespace Test
 
         public US2()
         {
-            Mock<IGame> _mockGame = new Mock<IGame>();
-            _mockGame.SetupGet(x => x.NumberSquares).Returns(Constants.BOARD_SQUARES);
-
-            _game = _mockGame.Object;
+            _game = new Mock<Game>().Object;
             _player = new Mock<PlayerToken>().Object;
         }
 

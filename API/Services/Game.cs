@@ -14,48 +14,24 @@ namespace API.Services
         { 
             get 
             { 
-                if ((_players == null) || (_players.ToList().Count <= 0) || (_idice == null)) _stage = GAME_STAGES.STOPED;
+                if ((_players == null) || (_players.ToList().Count <= 0)) _stage = GAME_STAGES.STOPED;
                 else if(_players.Any(x => x.IsWinner(this))) _stage = GAME_STAGES.ENDED;
                 else _stage = GAME_STAGES.GAMING;
                 return _stage; 
             } 
         }
 
-        public Game(IDice dice)
-        {
-            _idice = dice;
-        }
-
         public void Start(IEnumerable<IPlayerToken> players)
         {
             _players = players;
-            _stage = GAME_STAGES.GAMING;
-        }
-
-        public void Play()
-        {
-            if (Stage == GAME_STAGES.GAMING)
+            if (_players != null)
             {
-                while(Stage != GAME_STAGES.ENDED)
+                foreach (IPlayerToken player in _players)
                 {
-                    foreach (var player in _players)
-                    {
-                        int spacesToMove = _idice.Roll();
-                        player.Move(spacesToMove);
-                        if (player.IsWinner(this))
-                        {
-                            _stage = GAME_STAGES.ENDED;
-                            break;
-                        }
-                    }
+                    player.Position = 1;
                 }
+                _stage = GAME_STAGES.GAMING;
             }
-        }
-
-        public void Reset()
-        {
-            _players = null;
-            _stage = GAME_STAGES.STOPED;
         }
     }
 }
