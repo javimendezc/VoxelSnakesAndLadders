@@ -14,22 +14,24 @@ namespace Test
             Assert.True(board.Stage.Equals(GAME_STAGES.STOPED));
         }
 
-        [Fact(DisplayName = "Boards_Without_Dice_Is_Stoped")]
-        public void Boards_Without_Dice_Is_Stoped()
-        {
-            Board board = new Board(null);
-            Assert.True(board.Stage.Equals(GAME_STAGES.STOPED));
-        }
-
         [Fact(DisplayName = "Game_Only_Can_Play_With_Players_And_Dice")]
         public void Game_Only_Can_Play_With_Players_And_Dice()
         {
-            Board board = new Board(new Dice());
-            board.Start(null);
+            Dice dice = null;
+            List<PlayerToken> tokens = null;
+
+            Board board = new Board(dice);
+            board.Start(tokens);
             board.Play();
             Assert.True(board.Stage.Equals(GAME_STAGES.STOPED));
 
-            List<PlayerToken> tokens = new List<PlayerToken>();
+            dice = new Dice();
+            board = new Board(dice);
+            board.Start(tokens);
+            board.Play();
+            Assert.True(board.Stage.Equals(GAME_STAGES.STOPED));
+
+            tokens = new List<PlayerToken>();
             board.Start(tokens);
             board.Play();
             Assert.True(board.Stage == GAME_STAGES.STOPED);
